@@ -1,40 +1,17 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Task
 
-## Getting Started
+We're setting up a website with internationalization (i18n) on Next.js, but we've encountered a problem with the i18n part. Our website supports English ("en") and Spanish ("es"), and we don't want to add "en" to the URL if the browser's detected language is English. However, we're facing an issue with page redirection.
 
-First, run the development server:
+- Navigating to `https://example.com/es/test` works correctly.
+- Navigating to `https://example.com/test` doesn't work as expected.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+Here's what we expect to happen:
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+- If a user navigates to `https://example.com/test` and their browser is detected as using English, it should display the test page with English content.
+- If a user navigates to `https://example.com/en/test` and their browser is detected as using English, it should redirect to `/test` and display the test page with English content.
+- If a user navigates to `https://example.com/es/test`, and their browser is detected as using Spanish, it should display the test page with Spanish content.
+- It should be possible to add new languages in the future, not just English and Spanish.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Since we're using Next.js 14, we also want to continue using App Router and React Server Components to handle SEO in the future, and we wish to keep this as part of our ongoing work.
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
-
----
-
-
+The task will be considered complete once you open a Pull Request to the boilerplate repository detailing the changes you've made.
