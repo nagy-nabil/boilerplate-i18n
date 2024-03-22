@@ -6,7 +6,7 @@ const Page = () => {
     return (
         <>
             <h1>{t("title")}</h1>
-            test page
+            <p>test2</p>
         </>
     );
 };
