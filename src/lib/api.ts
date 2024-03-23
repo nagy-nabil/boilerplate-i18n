@@ -10,7 +10,7 @@ export function getPostSlugs() {
 }
 
 export function getPostBySlug(slug: string, locale?: string) {
-  console.log({ slug, locale })
+  console.log("DEBUGPRINT[1]: api.ts:12: slug, locale=", {slug, locale})
   const realSlug = slug.replace(/\.md$/, "");
   const fullPath = locale ? join(postsDirectory, `${realSlug}-${locale}.md`) : join(postsDirectory, `${realSlug}.md`);
   const fileContents = fs.readFileSync(fullPath, "utf8");
