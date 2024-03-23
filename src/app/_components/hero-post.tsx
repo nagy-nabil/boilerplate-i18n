@@ -1,7 +1,7 @@
 import Avatar from "@/app/_components/avatar";
 import CoverImage from "@/app/_components/cover-image";
 import { type Author } from "@/interfaces/author";
-import Link from "next/link";
+import {Link} from "@/navigation";
 import DateFormatter from "./date-formatter";
 
 type Props = {
@@ -30,8 +30,8 @@ export function HeroPost({
         <div>
           <h3 className="mb-4 text-4xl lg:text-5xl leading-tight">
             <Link
-              as={`/posts/${slug}`}
-              href="/posts/[slug]"
+              as={`/blog/${slug}`}
+              href="/blog/[slug]"
               className="hover:underline"
             >
               {title}

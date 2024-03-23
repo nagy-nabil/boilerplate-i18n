@@ -1,5 +1,5 @@
 import { type Author } from "@/interfaces/author";
-import Link from "next/link";
+import {Link} from "@/navigation";
 import Avatar from "./avatar";
 import CoverImage from "./cover-image";
 import DateFormatter from "./date-formatter";
@@ -28,8 +28,8 @@ export function PostPreview({
       </div>
       <h3 className="text-3xl mb-3 leading-snug">
         <Link
-          as={`/posts/${slug}`}
-          href="/posts/[slug]"
+          as={`/blog/${slug}`}
+          href="/blog/[slug]"
           className="hover:underline"
         >
           {title}
