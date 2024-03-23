@@ -1,7 +1,6 @@
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { getAllPosts, getPostBySlug } from "@/lib/api";
-import { CMS_NAME } from "@/lib/constants";
+import { /**getAllPosts,*/ getPostBySlug } from "@/lib/api";
 import markdownToHtml from "@/lib/markdownToHtml";
 import Container from "@/app/_components/container";
 import { PostBody } from "@/app/_components/post-body";
@@ -10,10 +9,10 @@ import Header from "@/app/_components/header";
 // import { unstable_setRequestLocale } from "next-intl/server";
 
 type Params = {
-	params: {
-		slug: string;
-		locale: string
-	};
+  params: {
+    slug: string;
+    locale: string
+  };
 };
 
 export default async function Post({ params }: Params) {
@@ -44,20 +43,23 @@ export default async function Post({ params }: Params) {
 }
 
 
-export function generateMetadata({ params }: Params): Metadata {
+export async function generateMetadata({ params }: Params): Promise<Metadata> {
   const post = getPostBySlug(params.slug, params.locale);
 
   if (!post) {
     return notFound();
   }
 
-  const title = `${post.title}`;
-
   return {
-    title,
+    metadataBase: new URL(process.env.NEXT_PUBLIC_URL?? "http://localhost:3000"),
+    title: post.title,
+    description: post.excerpt,
+    authors: [{ name: post.author.name }],
     openGraph: {
-      title,
+      title: post.title,
+      description: post.excerpt,
       images: [post.ogImage.url],
+      siteName: 'Next.js',
     },
   };
 }
