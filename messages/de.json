@@ -1,5 +1,9 @@
 {
     "Index": {
         "title": "Hallo Welt!"
+    },
+    "LocaleSwitcher": {
+        "label": "Sprache ändern",
+        "locale": "{locale, select, de {Deutsch} en {English} es {Español} other {Unbekannt}}"
     }
 }
