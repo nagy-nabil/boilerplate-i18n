@@ -7,6 +7,7 @@ import Container from "@/app/_components/container";
 import { PostBody } from "@/app/_components/post-body";
 import { PostHeader } from "@/app/_components/post-header";
 import Header from "@/app/_components/header";
+// import { unstable_setRequestLocale } from "next-intl/server";
 
 type Params = {
 	params: {
@@ -16,8 +17,7 @@ type Params = {
 };
 
 export default async function Post({ params }: Params) {
-  console.log("DEBUGPRINT[3]: page.tsx:18: params=", params)
-  const post = getPostBySlug(params.slug);
+  const post = getPostBySlug(params.slug, params.locale);
 
   if (!post) {
     return notFound();
@@ -45,14 +45,13 @@ export default async function Post({ params }: Params) {
 
 
 export function generateMetadata({ params }: Params): Metadata {
-  // TODO: pass the locale
-  const post = getPostBySlug(params.slug);
+  const post = getPostBySlug(params.slug, params.locale);
 
   if (!post) {
     return notFound();
   }
 
-  const title = `${post.title} | Next.js Blog Example with ${CMS_NAME}`;
+  const title = `${post.title}`;
 
   return {
     title,
@@ -63,10 +62,10 @@ export function generateMetadata({ params }: Params): Metadata {
   };
 }
 
-export async function generateStaticParams() {
-  const posts = getAllPosts();
-
-  return posts.map((post) => ({
-    slug: post.slug,
-  }));
-}
+// export async function generateStaticParams() {
+//   const posts = getAllPosts();
+//
+//   return posts.map((post) => ({
+//     slug: post.slug,
+//   }));
+// }
