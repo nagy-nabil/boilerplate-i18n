@@ -3,6 +3,7 @@ import { HeroPost } from "@/app/_components/hero-post";
 import { Intro } from "@/app/_components/intro";
 import { MoreStories } from "@/app/_components/more-stories";
 import { getAllPosts } from "@/lib/api";
+import { unstable_setRequestLocale } from "next-intl/server";
 
 type Params = {
 	params: {
@@ -11,6 +12,11 @@ type Params = {
 };
 
 export default function Index({ params }: Params) {
+  // Enable static rendering
+  unstable_setRequestLocale(params.locale);
+
+  console.warn("DEBUGPRINT[5]: page.tsx:14: params=/blog", params)
+
   const allPosts = getAllPosts(params.locale);
 
   const heroPost = allPosts[0];

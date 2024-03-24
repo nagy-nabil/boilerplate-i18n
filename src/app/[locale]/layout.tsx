@@ -3,7 +3,8 @@ import { Inter } from "next/font/google";
 import "../globals.css";
 import LocaleSwitcher from "../_components/localeSwitcher";
 import { Link } from "@/navigation";
-// import { locales} from '@/navigation'
+import { locales} from '@/navigation'
+import { unstable_setRequestLocale } from "next-intl/server";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -19,6 +20,9 @@ export default function LocaleLayout({
   children: React.ReactNode;
   params: { locale: string };
 }) {
+  // Enable static rendering
+  unstable_setRequestLocale(locale);
+
   return (
     <html className={inter.className} lang={locale}>
       <body>
@@ -37,6 +41,6 @@ export default function LocaleLayout({
   );
 }
 
-// export function generateStaticParams() {
-//   return locales.map((locale) => ({locale}));
-// }
+export function generateStaticParams() {
+  return locales.map((locale) => ({locale}));
+}

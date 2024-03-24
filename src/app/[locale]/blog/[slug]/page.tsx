@@ -1,12 +1,12 @@
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { /**getAllPosts,*/ getPostBySlug } from "@/lib/api";
+import { getAllPosts, getPostBySlug } from "@/lib/api";
 import markdownToHtml from "@/lib/markdownToHtml";
 import Container from "@/app/_components/container";
 import { PostBody } from "@/app/_components/post-body";
 import { PostHeader } from "@/app/_components/post-header";
 import Header from "@/app/_components/header";
-// import { unstable_setRequestLocale } from "next-intl/server";
+import { unstable_setRequestLocale } from "next-intl/server";
 
 type Params = {
   params: {
@@ -16,6 +16,10 @@ type Params = {
 };
 
 export default async function Post({ params }: Params) {
+  // Enable static rendering
+  unstable_setRequestLocale(params.locale);
+
+  console.warn("DEBUGPRINT[6]: page.tsx:18: params=page itself", params)
   const post = getPostBySlug(params.slug, params.locale);
 
   if (!post) {
@@ -64,10 +68,11 @@ export async function generateMetadata({ params }: Params): Promise<Metadata> {
   };
 }
 
-// export async function generateStaticParams() {
-//   const posts = getAllPosts();
-//
-//   return posts.map((post) => ({
-//     slug: post.slug,
-//   }));
-// }
+export async function generateStaticParams({params}: Params) {
+  console.log("DEBUGPRINT[4]: page.tsx:70: params=slug/page", params)
+  const posts = getAllPosts(params.locale);
+
+  return posts.map((post) => ({
+    slug: post.slug,
+  }));
+}
