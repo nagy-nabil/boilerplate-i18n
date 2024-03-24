@@ -15,8 +15,6 @@ export default function Index({ params }: Params) {
   // Enable static rendering
   unstable_setRequestLocale(params.locale);
 
-  console.warn("DEBUGPRINT[5]: page.tsx:14: params=/blog", params)
-
   const allPosts = getAllPosts(params.locale);
 
   const heroPost = allPosts[0];

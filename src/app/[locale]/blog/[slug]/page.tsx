@@ -19,7 +19,6 @@ export default async function Post({ params }: Params) {
   // Enable static rendering
   unstable_setRequestLocale(params.locale);
 
-  console.warn("DEBUGPRINT[6]: page.tsx:18: params=page itself", params)
   const post = getPostBySlug(params.slug, params.locale);
 
   if (!post) {
@@ -69,7 +68,6 @@ export async function generateMetadata({ params }: Params): Promise<Metadata> {
 }
 
 export async function generateStaticParams({params}: Params) {
-  console.log("DEBUGPRINT[4]: page.tsx:70: params=slug/page", params)
   const posts = getAllPosts(params.locale);
 
   return posts.map((post) => ({
