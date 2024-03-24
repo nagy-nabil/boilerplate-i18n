@@ -4,11 +4,12 @@ import { Intro } from "@/app/_components/intro";
 import { MoreStories } from "@/app/_components/more-stories";
 import { getAllPosts } from "@/lib/api";
 import { unstable_setRequestLocale } from "next-intl/server";
+import { locales } from '@/navigation'
 
 type Params = {
-	params: {
-		locale: string
-	};
+  params: {
+    locale: string
+  };
 };
 
 export default function Index({ params }: Params) {
@@ -37,4 +38,19 @@ export default function Index({ params }: Params) {
       </Container>
     </main>
   );
+}
+
+export async function generateMetadata() {
+  const languages: Record<string, string> = {}
+  locales.forEach(languageCode => {
+    languages[languageCode] = `/${languageCode}/blog`;
+  });
+
+  return {
+    metadataBase: new URL(process.env.NEXT_PUBLIC_URL ?? "http://localhost:3000"),
+    alternates: {
+      canonical: '/',
+      languages,
+    },
+  }
 }
